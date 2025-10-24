@@ -141,13 +141,15 @@ def axes_shaper_calibration(gcmd, klipper_config, st_process: ShakeTuneProcess) 
         toolhead.wait_moves()
 
         # And finally generate the graph for each measured axis
-        ConsoleOutput.print(f'{config["axis"].upper()} axis frequency profile generation...')
-        ConsoleOutput.print('This may take some time (1-3min)')
+        ConsoleOutput.print(f'{config["axis"].upper()} axis frequency profile .st data file generation started...')
         creator.configure(scv, max_sm, test_params, max_scale)
         creator.define_output_target(filename)
         measurements_manager.save_stdata()
-        st_process.run(filename)
-        st_process.wait_for_completion()
+        # st_process.run(filename)
+        # st_process.wait_for_completion()
+        ConsoleOutput.print(
+            f'{config["axis"].upper()} axis frequency profile .st data files saved and ready for manual processing using the CLI!'
+        )
         toolhead.dwell(1)
 
     # Re-enable the input shaper if it was active
